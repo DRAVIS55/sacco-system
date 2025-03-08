@@ -1,103 +1,138 @@
-<section id="faq">
-    <h2><strong>Frequently Asked Questions</strong></h2>
-    <p>Your Questions, Answered – Get the Information You Need!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Dravsech SACCO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .header {
+            background: #004085;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            position: relative;
+        }
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #ffc107;
+            color: black;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .home-button:hover {
+            background: #e0a800;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .membership-section {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            color: #004085;
+        }
+        .join-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .join-button:hover {
+            background: #218838;
+        }
+        .faq-item {
+            text-align: left;
+            margin: 15px 0;
+        }
+        details {
+            background: #e9ecef;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        summary {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="{% url 'home' %}" class="home-button">⬅ Home</a>
+        Join Dravsech SACCO
+    </header>
 
-    <div class="faq-item">
-        <h3>🔹 General Questions</h3>
-
-        <details>
-            <summary><strong>What is Dravsech SACCO?</strong></summary>
-            <p>Dravsech SACCO is a member-based financial institution that offers savings, loans, and investment opportunities to help individuals and businesses achieve financial growth.</p>
-        </details>
-
-        <details>
-            <summary><strong>Who can join Dravsech SACCO?</strong></summary>
-            <p>Anyone who meets the membership requirements can join, including individuals, business owners, and groups looking for financial support and investment opportunities.</p>
-        </details>
-
-        <details>
-            <summary><strong>How do I become a member?</strong></summary>
-            <p>You can become a member by filling out a membership form, providing the necessary documents, and making an initial deposit. Visit our office or apply online.</p>
-        </details>
+    <div class="container">
+        <section class="membership-section">
+            <h2>Why Join Dravsech SACCO?</h2>
+            <p>Becoming a member of Dravsech SACCO grants you access to exclusive financial benefits, including savings, loans, and investment opportunities.</p>
+            <ul style="text-align: left; display: inline-block;">
+                <li>✔ Competitive interest rates on savings & loans</li>
+                <li>✔ Access to emergency & business loans</li>
+                <li>✔ Secure and convenient mobile banking</li>
+                <li>✔ Dividend earnings on SACCO shares</li>
+                <li>✔ Professional financial advice & guidance</li>
+            </ul>
+            <br>
+            <a href="{% url 'register' %}" class="join-button">Join Now</a>
+        </section>
     </div>
 
-    <div class="faq-item">
-        <h3>🔹 Savings & Deposits</h3>
+    <div class="container">
+        <section id="faq" class="membership-section">
+            <h2>Frequently Asked Questions</h2>
+            <p>Your Questions, Answered – Get the Information You Need!</p>
 
-        <details>
-            <summary><strong>What types of savings accounts do you offer?</strong></summary>
-            <p>We offer various savings accounts, including regular savings, fixed deposit accounts, and group savings plans.</p>
-        </details>
-
-        <details>
-            <summary><strong>Can I withdraw my savings anytime?</strong></summary>
-            <p>Yes, you can withdraw from your savings account at any time. However, fixed deposit accounts have specific withdrawal terms.</p>
-        </details>
-
-        <details>
-            <summary><strong>Do I earn interest on my savings?</strong></summary>
-            <p>Yes, all our savings accounts earn competitive interest rates, ensuring your money grows over time.</p>
-        </details>
+            <div class="faq-item">
+                <h3>🔹 General Questions</h3>
+                <details>
+                    <summary>What is Dravsech SACCO?</summary>
+                    <p>Dravsech SACCO is a member-based financial institution offering savings, loans, and investment opportunities.</p>
+                </details>
+                <details>
+                    <summary>Who can join?</summary>
+                    <p>Individuals, businesses, and investment groups can become members.</p>
+                </details>
+            </div>
+            <div class="faq-item">
+                <h3>🔹 Savings & Deposits</h3>
+                <details>
+                    <summary>Do I earn interest on my savings?</summary>
+                    <p>Yes, all our savings accounts earn competitive interest rates.</p>
+                </details>
+            </div>
+            <div class="faq-item">
+                <h3>🔹 Loan Products</h3>
+                <details>
+                    <summary>What types of loans do you offer?</summary>
+                    <p>We provide personal, business, emergency, and school fees loans with flexible repayment plans.</p>
+                </details>
+            </div>
+        </section>
     </div>
-
-    <div class="faq-item">
-        <h3>🔹 Loan Products</h3>
-
-        <details>
-            <summary><strong>What types of loans do you offer?</strong></summary>
-            <p>We provide personal loans, business loans, emergency loans, school fees loans, and asset financing loans with flexible repayment plans.</p>
-        </details>
-
-        <details>
-            <summary><strong>How do I apply for a loan?</strong></summary>
-            <p>You can apply for a loan by visiting our SACCO office or applying online through our digital loan application platform.</p>
-        </details>
-
-        <details>
-            <summary><strong>What happens if I miss a loan repayment?</strong></summary>
-            <p>Late payments may attract penalties. If payments continue to be delayed, legal action may be taken, and your collateral may be at risk.</p>
-        </details>
-    </div>
-
-    <div class="faq-item">
-        <h3>🔹 Investment Opportunities</h3>
-
-        <details>
-            <summary><strong>What investment options are available?</strong></summary>
-            <p>We offer share capital investments, fixed deposits, real estate investments, agribusiness projects, and government securities.</p>
-        </details>
-
-        <details>
-            <summary><strong>How do I invest in SACCO shares?</strong></summary>
-            <p>Members can buy shares in the SACCO, and dividends are paid annually based on the SACCO's financial performance.</p>
-        </details>
-    </div>
-
-    <div class="faq-item">
-        <h3>🔹 Mobile & Online Banking</h3>
-
-        <details>
-            <summary><strong>Does Dravsech SACCO offer mobile banking?</strong></summary>
-            <p>Yes, we provide mobile and online banking services to help you manage your savings, loans, and transactions anytime, anywhere.</p>
-        </details>
-
-        <details>
-            <summary><strong>How secure is online banking?</strong></summary>
-            <p>We use advanced security measures, including encryption and two-factor authentication, to ensure your online transactions are safe.</p>
-        </details>
-    </div>
-
-    <div class="faq-item">
-        <h3>🔹 Membership & Support</h3>
-
-        <details>
-            <summary><strong>How do I contact customer support?</strong></summary>
-            <p>You can reach us via phone, email, or by visiting our offices during business hours.</p>
-        </details>
-
-        <details>
-            <summary><strong>Can I refer others to join the SACCO?</strong></summary>
-            <p>Yes! We have a referral program that rewards members for introducing new members to the SACCO.</p>
-        </details>
-    </div>
-</section>
+</body>
+</html>

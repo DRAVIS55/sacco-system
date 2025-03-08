@@ -1,21 +1,119 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.hashers import make_password
-from django.http import HttpResponse
-from .models import UserCredentials, Member  # Ensure Member model is imported
+from django.http import HttpResponse,JsonResponse
+from .models import UserCredentials, Member, ContactMessage, Loan  # Ensure Member model is imported
 from django.contrib.auth.hashers import check_password
 from .models import UserCredentials,MemberAccount
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User  # Import Django's User model
-
+from django.utils.timezone import now
+from datetime import timedelta
+from .models import LoanRepayment, Loan
 
 # Create your views here.
+
+
+
+def make_repayment(request):
+    if request.method == "POST":
+        loan_id = request.POST.get("loan_id")
+        amount_paid = float(request.POST.get("amount"))
+
+        # Fetch loan
+        loan = Loan.objects.get(loan_id=loan_id)
+
+        # Create a repayment record
+        LoanRepayment.objects.create(
+            loan=loan,
+            amount_paid=amount_paid
+        )
+
+        return JsonResponse({"success": True, "message": "Repayment recorded successfully!"})
+
+    return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
+
+
+def dashboard(request):
+    approved_loans = Loan.objects.filter(status="Approved")
+    return render(request, "dashboard.html", {"approved_loans": approved_loans})
+
+
+def apply_loan(request):
+    if request.method == "POST":
+        member_id = request.POST.get("member_id")
+        amount = float(request.POST.get("amount"))
+        loan_type = request.POST.get("loan_type")
+
+        # Fetch the member
+        member = get_object_or_404(Member, id=member_id)
+
+        # Define interest rates per loan type
+        interest_rates = {
+            "business": 5.0,
+            "personal": 6.0,
+            "education": 4.5,
+            "health": 4.0,
+            "others": 3.5,
+        }
+
+        # Set interest rate based on loan type
+        interest_rate = interest_rates.get(loan_type, 5.0)
+
+        # Set due date (3 months from today)
+        due_date = now().date() + timedelta(days=90)
+
+        # Save loan in database
+        loan = Loan.objects.create(
+            member=member,
+            amount=amount,
+            interest_rate=interest_rate,
+            start_date=now().date(),
+            due_date=due_date,
+            status="Pending"
+        )
+
+        return JsonResponse({"success": True, "message": f"Loan approved for Ksh. {amount}!"})
+
+    return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
+
+
+def contact_view(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        if name and email and subject and message:
+            # Save to database
+            ContactMessage.objects.create(name=name, email=email, subject=subject, message=message)
+            
+            # Show success message
+            messages.success(request, "Your message has been sent successfully! We will get back to you soon.")
+        else:
+            # Show error message
+            messages.error(request, "Failed to send message. Please fill in all fields.")
+
+        return redirect('contact')  # Redirect to contact page
+
+    return render(request, 'contact.html')
+
+def membership(request):
+    return render(request,'membership.html')
+
+def auth_view(request):
+    return render(request,'login-register.html')
+
 def home(request):
     return render(request,'index.html')
 
 def portfolio(request):
     return render(request,'portfolio-details.html')
+
+def investments(request):
+    return render(request,'investments.html')
 
 def services(request):
     return render(request,'service-details.html')
@@ -61,10 +159,12 @@ def register(request):
 
     return render(request, "register.html")
 
+def savings(request):
+    return render(request,'savings.html')
 
+def credits(request):
+    return render(request,'credits.html')
     
-
-
 def about(request):
     return render(request,'about.html')
 

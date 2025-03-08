@@ -17,8 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from .views import apply_loan
+from .views import make_repayment
+
+
+    
+
 
 urlpatterns = [
+    path('make-repayment/', make_repayment, name='make_repayment'),
+    path('auth_view/', views.auth_view, name='auth_view'),
+    path('apply-loan/', apply_loan, name='apply_loan'),
     path('admin/', admin.site.urls),
     path('', views.home,name='home'),
     path('portfolio/', views.portfolio,name='portfolio'),
@@ -36,4 +45,9 @@ urlpatterns = [
        path('login/',views.login_view,name='login'),
         path('userpanel/',views.userdashboard,name='userpanel'),
        path("setpassword/", views.setpassword, name="setpassword"),
+         path("membership/", views.membership, name="membership"),
+         path("savings/", views.savings, name="savings"),
+         path("credits/", views.credits, name="credits"),
+          path("investments/", views.investments, name="investments"),
+           
 ]
